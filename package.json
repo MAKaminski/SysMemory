@@ -1,8 +1,10 @@
 {
   "name": "SysUsage",
-  "displayName": "Time Tracker",
-  "description": "Time tracker for on-going execution monitoring",
-  "version": "0.0.1",
+  "displayName": "SysMemory Usage",
+  "description": "A VS Code extension that displays memory and cpu usage both in units and %. Also identifies # of cores and threads available on the machine based on default math (not sys specific, accuracy low).",
+  "version": "0.0.2",
+  "publisher": "MKaminski1337",
+  "icon": "logo.png",
   "engines": {
     "vscode": "^1.87.0"
   },
@@ -41,6 +43,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/username/repository.git"
+    "url": "https://github.com/MAKaminski/SysMemory"
   }
 }

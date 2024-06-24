@@ -17,7 +17,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
         with:
-          ref: main
+          ref: main2
 
       - name: Get Traffic Data
         id: traffic
@@ -54,4 +54,4 @@ jobs:
           git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
           git add README.md
           git commit -m "Update README with traffic info"
-          git push origin main
+          git push origin main2

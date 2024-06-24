@@ -61,7 +61,8 @@ jobs:
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
           git remote set-url origin https://x-access-token:${{ secrets.FINE_GRAINED_TOKEN }}@github.com/${{ github.repository }}.git
-          git pull origin main2 --rebase  # Pull latest changes from remote before pushing
+          git fetch origin main2  # Fetch the latest changes from the remote branch
+          git rebase origin/main2  # Rebase the local changes on top of the latest changes
           git add README.md
           git commit -m "Update README with traffic info" || echo "No changes to commit"
           git push origin main2

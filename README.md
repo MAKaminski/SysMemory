@@ -8,7 +8,7 @@ Last updated: 2024-06-24
 
 This extension provides real-time system usage statistics in the status bar of Visual Studio Code. 
 
-It displays the current memory usage, CPU load, and the number of cores and threads.
+It displays the current memory usage, CPU load, and the number of cores and threads. 
 
 ## Features
 

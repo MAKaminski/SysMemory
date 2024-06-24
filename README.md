@@ -1,4 +1,4 @@
-## TRAFFIC
+## Traffic Info
 
 # SysUsage
 

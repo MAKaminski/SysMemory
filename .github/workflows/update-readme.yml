@@ -17,7 +17,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
         with:
-          ref: main  # Checkout the main branch initially
+          ref: main2  # Ensure the main2 branch is checked out
 
       - name: Create or Checkout main2 Branch
         run: |
@@ -46,10 +46,13 @@ jobs:
           UNIQUES=${{ steps.traffic.outputs.unique }}
           DATE=$(date '+%Y-%m-%d')
           echo "Updating README.md..."
-          # Remove old Traffic Info section
-          sed -i '/## Traffic Info/,/^$/d' README.md
-          # Insert new Traffic Info section at the top
-          echo -e "## Traffic Info\nLast updated: $DATE\n\n* Total Views: $VIEWS\n* Unique Visitors: $UNIQUES\n\n$(cat README.md)" > README.md
+          # Create the new Traffic Info section
+          new_traffic_info=$(echo -e "## Traffic Info\nLast updated: $DATE\n\n* Total Views: $VIEWS\n* Unique Visitors: $UNIQUES\n\n")
+          # Remove old Traffic Info section and insert the new one at the top
+          awk -v new_info="$new_traffic_info" '
+            BEGIN { print new_info }
+            $0 !~ /^## Traffic Info$/ && $0 !~ /^Last updated:/ && $0 !~ /^\* Total Views:/ && $0 !~ /^\* Unique Visitors:/ { print }
+          ' README.md > README.tmp && mv README.tmp README.md
 
       - name: Commit and Push Changes
         env:

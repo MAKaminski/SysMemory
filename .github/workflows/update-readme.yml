@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        with:
+          ref: main  # Ensure the main branch is checked out
 
       - name: Get Traffic Data
         id: traffic
@@ -25,8 +27,13 @@ jobs:
           response=$(curl -H "Accept: application/vnd.github.v3+json" \
                        -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
                        https://api.github.com/repos/${{ github.repository }}/traffic/views)
-          echo "::set-output name=views::$(echo $response | jq '.count')"
-          echo "::set-output name=unique::$(echo $response | jq '.uniques')"
+          echo "Response: $response"  # Print the raw response for debugging
+          views=$(echo $response | jq '.count')
+          uniques=$(echo $response | jq '.uniques')
+          echo "Views: $views"
+          echo "Uniques: $uniques"
+          echo "::set-output name=views::$views"
+          echo "::set-output name=unique::$uniques"
 
       - name: Update README
         run: |
@@ -34,11 +41,11 @@ jobs:
           UNIQUES=${{ steps.traffic.outputs.unique }}
           DATE=$(date '+%Y-%m-%d')
           echo "Updating README.md..."
-          sed -i '/## Traffic Info/,$ d' README.md
-          echo "## Traffic Info\n" >> README.md
-          echo "Last updated: $DATE\n" >> README.md
-          echo "* Total Views: $VIEWS\n" >> README.md
-          echo "* Unique Visitors: $UNIQUES\n" >> README.md
+          # Insert or update the traffic section at the top of the README
+          awk -v views="$VIEWS" -v uniques="$UNIQUES" -v date="$DATE" '
+            BEGIN { print "## Traffic Info\nLast updated: " date "\n\n* Total Views: " views "\n* Unique Visitors: " uniques "\n" }
+            NR>1 { print }
+          ' README.md > README.tmp && mv README.tmp README.md
 
       - name: Commit and Push Changes
         env:

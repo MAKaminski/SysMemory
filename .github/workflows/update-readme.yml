@@ -38,9 +38,12 @@ jobs:
           echo "* Unique Visitors: $UNIQUES\n" >> README.md
 
       - name: Commit and Push Changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
+          git remote set-url origin https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
           git add README.md
           git commit -m "Update README with traffic info"
-          git push
+          git push origin HEAD:main

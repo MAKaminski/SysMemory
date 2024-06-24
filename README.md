@@ -1,8 +1,9 @@
 ## Traffic Info
-Last updated: 2024-06-2024
+Last updated: 2024-06-24
 
-* Total Views: XX
-* Unique Visitors: X
+* Total Views: null
+* Unique Visitors: null
+
 
 # SysUsage
 

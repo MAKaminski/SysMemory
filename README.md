@@ -20,7 +20,7 @@ The SysUsage extension provides the following features:
 
 ## Requirements
 
-This extension requires the `systeminformation` npm package. This package is used to retrieve system information. It should be installed and configured as part of the extension installation process.
+This extension requires the `systeminformation` npm package. This package is used to retrieve system information. It should be installed and configured as part of the extension installation process. 
 
 ## Extension Settings
 

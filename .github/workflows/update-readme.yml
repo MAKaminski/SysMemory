@@ -27,11 +27,11 @@ jobs:
           response=$(curl -H "Accept: application/vnd.github.v3+json" \
                        -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
                        https://api.github.com/repos/${{ github.repository }}/traffic/views)
-          echo "Response: $response"  # Print the raw response for debugging
+          echo "Raw Response: $response"  # Print the raw response for debugging
           views=$(echo $response | jq '.count')
           uniques=$(echo $response | jq '.uniques')
-          echo "Views: $views"
-          echo "Uniques: $uniques"
+          echo "Parsed Views: $views"
+          echo "Parsed Uniques: $uniques"
           echo "::set-output name=views::$views"
           echo "::set-output name=unique::$uniques"
 
@@ -55,5 +55,5 @@ jobs:
           git config --global user.email 'github-actions@github.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           git add README.md
-          git commit -m "Update README with traffic info"
+          git commit -m "README - Traffic Analytics"
           git push origin HEAD:main

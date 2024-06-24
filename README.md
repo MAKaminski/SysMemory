@@ -29,7 +29,7 @@ There are currently no known issues with this extension.
 ## Release Notes
 
 Date:       06/24/2024
-Updates:    Added Repo Traffic Github Workflow to Ensure Readme remains up to date 
+Updates:    Added Repo Traffic Github Workflow to Ensure Readme remains up to dat
 
 ### 1.0.0
 

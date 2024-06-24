@@ -2,12 +2,12 @@ name: Update README with Traffic Info
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Runs daily at midnight
-  push:  # Runs on every push to the repository
-  workflow_dispatch:  # Allows manual triggering of the workflow
+    - cron: '0 0 * * *'
+  push:
+  workflow_dispatch:
 
 permissions:
-  contents: write  # Grants write permission to contents
+  contents: write
 
 jobs:
   update-readme:
@@ -17,7 +17,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
         with:
-          ref: main  # Ensure the main branch is checked out
+          ref: main
 
       - name: Get Traffic Data
         id: traffic
@@ -40,12 +40,10 @@ jobs:
           UNIQUES=${{ steps.traffic.outputs.unique }}
           DATE=$(date '+%Y-%m-%d')
           echo "Updating README.md..."
-          # Store existing content without the Traffic Info section
-          sed '/## Traffic Info/,/^\s*$/d' README.md > README.tmp
+          # Remove old Traffic Info section
+          sed -i '/## Traffic Info/,/^$/d' README.md
           # Insert new Traffic Info section at the top
-          echo "## Traffic Info\nLast updated: $DATE\n\n* Total Views: $VIEWS\n* Unique Visitors: $UNIQUES\n\n" > README.md
-          # Append the rest of the content
-          cat README.tmp >> README.md
+          echo -e "## Traffic Info\nLast updated: $DATE\n\n* Total Views: $VIEWS\n* Unique Visitors: $UNIQUES\n\n$(cat README.md)" > README.md
 
       - name: Commit and Push Changes
         env:

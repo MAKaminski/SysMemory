@@ -1,7 +1,10 @@
 name: Update README with Traffic Info
+
+# Define when the workflow should be triggered
 on:
   schedule:
     - cron: '0 0 * * *'  # Runs daily at midnight
+  push:  # Runs on every push to the repository
   workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:
@@ -17,7 +20,7 @@ jobs:
         run: |
           echo "Fetching traffic data..."
           response=$(curl -H "Accept: application/vnd.github.v3+json" \
-                       -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
+                       -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
                        https://api.github.com/repos/${{ github.repository }}/traffic/views)
           echo "::set-output name=views::$(echo $response | jq '.count')"
           echo "::set-output name=unique::$(echo $response | jq '.uniques')"

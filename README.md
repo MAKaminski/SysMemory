@@ -1,6 +1,10 @@
-# MKaminski_VSCode_SysUsage README
+## TRAFFIC
 
-This is the README for the "SysUsage" extension. This extension provides real-time system usage statistics in the status bar of Visual Studio Code. It displays the current memory usage, CPU load, and the number of cores and threads.
+# SysUsage
+
+This extension provides real-time system usage statistics in the status bar of Visual Studio Code. 
+
+It displays the current memory usage, CPU load, and the number of cores and threads.
 
 ## Features
 
@@ -23,6 +27,9 @@ This extension does not currently add any Visual Studio Code settings through th
 There are currently no known issues with this extension.
 
 ## Release Notes
+
+Date:       06/24/2024
+Updates:    Added Repo Traffic Github Workflow to Ensure Readme remains up to date 
 
 ### 1.0.0
 

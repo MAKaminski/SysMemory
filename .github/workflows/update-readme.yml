@@ -64,5 +64,7 @@ jobs:
           git add README.md
           git commit -m "Update README with traffic info" || echo "No changes to commit"
           git fetch origin main2  # Fetch the latest changes from the remote branch
+          git stash  # Stash any local changes to ensure a clean working directory
           git rebase origin/main2  # Rebase the local changes on top of the latest changes
+          git stash pop  # Apply the stashed changes back
           git push origin main2

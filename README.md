@@ -1,42 +1,59 @@
-## Traffic Info
-Last updated: 2024-06-24
+name: Update README with Traffic Info
 
-* Total Views: 18
-* Unique Visitors: 3
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily at midnight
+  push:  # Runs on every push to the repository
+  workflow_dispatch:  # Allows manual triggering of the workflow
 
-# SysUsage
+permissions:
+  contents: write  # Grants write permission to contents
 
-This extension provides real-time system usage statistics in the status bar of Visual Studio Code. 
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
 
-It displays the current memory usage, CPU load, and the number of cores and threads. 
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          ref: main  # Ensure the main branch is checked out
 
-## Features
+      - name: Get Traffic Data
+        id: traffic
+        run: |
+          echo "Fetching traffic data..."
+          response=$(curl -H "Accept: application/vnd.github.v3+json" \
+                       -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
+                       https://api.github.com/repos/${{ github.repository }}/traffic/views)
+          echo "Raw Response: $response"  # Print the raw response for debugging
+          views=$(echo $response | jq '.count')
+          uniques=$(echo $response | jq '.uniques')
+          echo "Parsed Views: $views"
+          echo "Parsed Uniques: $uniques"
+          echo "::set-output name=views::$views"
+          echo "::set-output name=unique::$uniques"
 
-The SysUsage extension provides the following features:
+      - name: Update README
+        run: |
+          VIEWS=${{ steps.traffic.outputs.views }}
+          UNIQUES=${{ steps.traffic.outputs.unique }}
+          DATE=$(date '+%Y-%m-%d')
+          echo "Updating README.md..."
+          # Store existing content without the Traffic Info section
+          sed '/## Traffic Info/,/^\s*$/d' README.md > README.tmp
+          # Insert new Traffic Info section at the top
+          echo "## Traffic Info\nLast updated: $DATE\n\n* Total Views: $VIEWS\n* Unique Visitors: $UNIQUES\n\n" > README.md
+          # Append the rest of the content
+          cat README.tmp >> README.md
 
-- Display of current memory usage in GB and as a percentage of total memory.
-- Display of current CPU load as a percentage.
-- Display of the number of cores and threads.
-
-## Requirements
-
-This extension requires the `systeminformation` npm package. This package is used to retrieve system information. It should be installed and configured as part of the extension installation process.
-
-## Extension Settings
-
-This extension does not currently add any Visual Studio Code settings through the `contributes.configuration` extension point.
-
-## Known Issues
-
-There are currently no known issues with this extension.
-
-## Release Notes
-
-Date:       06/24/2024
-Updates:    Added Repo Traffic Github Workflow to Ensure Readme remains up to dat
-
-### 1.0.0
-
-Initial release of SysUsage.
-
----
+      - name: Commit and Push Changes
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
+          git add README.md
+          git commit -m "Update README with traffic info"
+          git push origin HEAD:main

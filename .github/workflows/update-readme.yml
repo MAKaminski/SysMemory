@@ -40,17 +40,16 @@ jobs:
           UNIQUES=${{ steps.traffic.outputs.unique }}
           DATE=$(date '+%Y-%m-%d')
           echo "Updating README.md..."
-          # Remove old Traffic Info section
-          sed -i '/## Traffic Info/,/^\s*$/d' README.md
-          # Insert new Traffic Info section at the top of README
-          awk -v views="$VIEWS" -v uniques="$UNIQUES" -v date="$DATE" '
-            BEGIN { print "## Traffic Info\nLast updated: " date "\n\n* Total Views: " views "\n* Unique Visitors: " uniques "\n" }
-            { print }
-          ' README.md > README.tmp && mv README.tmp README.md
+          # Store existing content without the Traffic Info section
+          sed '/## Traffic Info/,/^\s*$/d' README.md > README.tmp
+          # Insert new Traffic Info section at the top
+          echo "## Traffic Info\nLast updated: $DATE\n\n* Total Views: $VIEWS\n* Unique Visitors: $UNIQUES\n\n" > README.md
+          # Append the rest of the content
+          cat README.tmp >> README.md
 
       - name: Commit and Push Changes
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'

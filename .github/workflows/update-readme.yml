@@ -7,6 +7,9 @@ on:
   push:  # Runs on every push to the repository
   workflow_dispatch:  # Allows manual triggering of the workflow
 
+permissions:
+  contents: write  # Grants write permission to contents
+
 jobs:
   update-readme:
     runs-on: ubuntu-latest

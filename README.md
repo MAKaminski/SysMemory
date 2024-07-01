@@ -1,8 +1,27 @@
 ## Traffic Info
-Last updated: 2024-06-24
 
-* Total Views: XX
-* Unique Visitors: X
+![GitHub stars](https://img.shields.io/github/stars/MAKaminski/SysMemory)
+![GitHub watchers](https://img.shields.io/github/watchers/MAKaminski/SysMemory)
+![GitHub forks](https://img.shields.io/github/forks/MAKaminski/SysMemory)
+![GitHub contributors](https://img.shields.io/github/contributors/MAKaminski/SysMemory)
+![GitHub all releases](https://img.shields.io/github/downloads/MAKaminski/SysMemory/total)
+![GitHub release date](https://img.shields.io/github/release-date/MAKaminski/SysMemory)
+![GitHub last commit](https://img.shields.io/github/last-commit/MAKaminski/SysMemory)
+
+## Repo
+![GitHub repo size](https://img.shields.io/github/repo-size/MAKaminski/SysMemory)
+![GitHub code size](https://img.shields.io/github/languages/code-size/MAKaminski/SysMemory)
+![GitHub language count](https://img.shields.io/github/languages/count/MAKaminski/SysMemory)
+![GitHub top language](https://img.shields.io/github/languages/top/MAKaminski/SysMemory)
+![Coverage](https://img.shields.io/codecov/c/github/MAKaminski/SysMemory)
+![GitHub contributors](https://img.shields.io/github/contributors/MAKaminski/SysMemory)
+![GitHub license](https://img.shields.io/github/license/MAKaminski/SysMemory)
+
+## Issues
+![GitHub issues](https://img.shields.io/github/issues/MAKaminski/SysMemory)
+![GitHub closed issues](https://img.shields.io/github/issues-closed/MAKaminski/SysMemory)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/MAKaminski/SysMemory)
+![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/MAKaminski/SysMemory)
 
 # SysUsage
 

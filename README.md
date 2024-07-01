@@ -14,7 +14,6 @@
 ![GitHub language count](https://img.shields.io/github/languages/count/MAKaminski/SysMemory)
 ![GitHub top language](https://img.shields.io/github/languages/top/MAKaminski/SysMemory)
 ![Coverage](https://img.shields.io/codecov/c/github/MAKaminski/SysMemory)
-![GitHub contributors](https://img.shields.io/github/contributors/MAKaminski/SysMemory)
 ![GitHub license](https://img.shields.io/github/license/MAKaminski/SysMemory)
 
 ## Issues

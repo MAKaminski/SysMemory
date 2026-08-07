@@ -32,14 +32,14 @@
     "@types/mocha": "^10.0.6",
     "@types/node": "18.x",
     "@types/vscode": "^1.87.0",
-    "@vscode/test-cli": "^0.0.6",
-    "@vscode/test-electron": "^2.3.9",
-    "eslint": "^8.56.0",
+    "@vscode/test-cli": "^0.0.15",
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^10.8.0",
     "typescript": "^5.3.3"
   },
   "dependencies": {
     "os-utils": "^0.0.14",
-    "systeminformation": "^5.22.0"
+    "systeminformation": "^5.31.7"
   },
   "repository": {
     "type": "git",
